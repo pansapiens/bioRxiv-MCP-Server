@@ -166,3 +166,34 @@ if __name__ == "__main__":
     doi = "10.1101/2024.06.25.600517"
     metadata = doi_get_biorxiv_metadata(doi)
     print(metadata)
+
+def main():
+    """Main entry point for biorxiv-web-search script"""
+    # 1. search_key_words 
+    key_words = "COVID-19"
+    articles = search_key_words(key_words, num_results=5)
+    print(articles)
+
+    # 2. search_advanced
+    # 示例：用户输入搜索参数
+    term = "CRISPR"
+    title = "CRISPR"
+    author1 = "Doudna"
+    author2 = None
+    abstract_title = "genome"
+    text_abstract_title = None
+    section = "New Results"
+    start_date = "2025-02-27"
+    end_date = "2025-03-18"
+    num_results = 5
+    articles = search_advanced(term, title, author1, author2, abstract_title, text_abstract_title, section, start_date, end_date, num_results)
+    print(articles)
+
+    # 3. doi get biorxiv metadata
+    doi = "10.1101/2024.06.25.600517"
+    metadata = doi_get_biorxiv_metadata(doi)
+    print(metadata)
+
+def run_biorxiv_web_search_cli():
+    """Entry point for biorxiv-web-search command"""
+    main()

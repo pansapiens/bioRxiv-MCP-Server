@@ -2,7 +2,7 @@ from typing import Any, List, Dict, Optional
 import asyncio
 import logging
 from mcp.server.fastmcp import FastMCP
-from biorxiv_web_search import search_key_words, search_advanced, doi_get_biorxiv_metadata
+from .biorxiv_web_search import search_key_words, search_advanced, doi_get_biorxiv_metadata
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -90,6 +90,12 @@ async def get_biorxiv_metadata(doi: str) -> Dict[str, Any]:
         return {"error": f"An error occurred while fetching metadata: {str(e)}"}
 
 if __name__ == "__main__":
+    logging.info("Starting bioRxiv MCP server")
+    # Initialize and run the server
+    mcp.run(transport='stdio')
+
+def main():
+    """Main entry point for biorxiv-mcp-server script"""
     logging.info("Starting bioRxiv MCP server")
     # Initialize and run the server
     mcp.run(transport='stdio')

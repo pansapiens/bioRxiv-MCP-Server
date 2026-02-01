@@ -9,3 +9,7 @@ dependencies = [
     "requests>=2.25.1",
     "beautifulsoup4>=4.9.3",
 ]
+
+[project.scripts]
+biorxiv-mcp-server = "biorxiv_mcp_server.biorxiv_server:main"
+biorxiv-web-search = "biorxiv_mcp_server.biorxiv_web_search:run_biorxiv_web_search_cli"

@@ -8,3 +8,4 @@ wheels/
 
 # Virtual environments
 .venv
+mcp_server_bioRxiv.egg-info

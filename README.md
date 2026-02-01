@@ -25,76 +25,54 @@ The bioRxiv MCP Server provides a bridge between AI assistants and bioRxiv's pre
 
 ### Installation
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/JackKuo666/bioRxiv-MCP-Server.git
-   cd bioRxiv-MCP-Server
-   ```
-
-2. Install the required dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-
-### Installing via Smithery
-
-To install bioRxiv Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@JackKuo666/biorxiv-mcp-server):
-
-#### claude
+#### Using uvx (Recommended)
 
 ```bash
-npx -y @smithery/cli@latest install @JackKuo666/biorxiv-mcp-server --client claude --config "{}"
+uvx --from "git+https://github.com/pansapiens/bioRxiv-MCP-Server" biorxiv-mcp-server
 ```
 
-#### Cursor
-
-Paste the following into Settings → Cursor Settings → MCP → Add new server: 
-- Mac/Linux  
-```s
-npx -y @smithery/cli@latest run @JackKuo666/biorxiv-mcp-server --client cursor --config "{}" 
-```
-#### Windsurf
-```sh
-npx -y @smithery/cli@latest install @JackKuo666/biorxiv-mcp-server --client windsurf --config "{}"
-```
-#### CLine
-```sh
-npx -y @smithery/cli@latest install @JackKuo666/biorxiv-mcp-server --client cline --config "{}"
-```
-
-#### Usage with Claude Desktop
+#### Using with Claude Desktop
 
 Add this configuration to your `claude_desktop_config.json`:
 
-(Mac OS)
-
 ```json
 {
   "mcpServers": {
     "biorxiv": {
-      "command": "python",
-      "args": ["-m", "biorxiv-mcp-server"]
-      }
-  }
-}
-```
-
-(Windows version):
-
-```json
-{
-  "mcpServers": {
-    "biorxiv": {
-      "command": "C:\\Users\\YOUR_USERNAME\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "command": "uvx",
       "args": [
-        "-m",
+        "--from",
+        "git+https://github.com/pansapiens/bioRxiv-MCP-Server",
         "biorxiv-mcp-server"
       ]
     }
   }
 }
 ```
-Using with Cline
+
+#### Using with Cursor
+
+Add this configuration to your cursor settings:
+
+```json
+{
+  "mcpServers": {
+    "biorxiv": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/pansapiens/bioRxiv-MCP-Server",
+        "biorxiv-mcp-server"
+      ]
+    }
+  }
+}
+```
+
+#### Using with Cline
+
+Add this configuration to your cline settings:
+
 ```json
 {
   "mcpServers": {
@@ -102,11 +80,29 @@ Using with Cline
       "command": "bash",
       "args": [
         "-c",
-        "source /home/YOUR/PATH/mcp-server-bioRxiv/.venv/bin/activate && python /home/YOUR/PATH/mcp-server-bioRxiv/biorxiv_server.py"
+        "uvx --from \"git+https://github.com/pansapiens/bioRxiv-MCP-Server\" biorxiv-mcp-server"
+      ]
+    }
+  }
+}
+```
+
+#### Using with Opencode
+
+Add this configuration to your `~/.config/opencode/opencode.json`:
+
+```json
+{
+  "mcp": {
+    "biorxiv": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "--from",
+        "git+https://github.com/pansapiens/bioRxiv-MCP-Server",
+        "biorxiv-mcp-server"
       ],
-      "env": {},
-      "disabled": false,
-      "autoApprove": []
+      "enabled": true
     }
   }
 }
@@ -118,7 +114,7 @@ Using with Cline
 Start the MCP server:
 
 ```bash
-python biorxiv_server.py
+uvx --from "git+https://github.com/pansapiens/bioRxiv-MCP-Server" biorxiv-mcp-server
 ```
 
 ## 🛠 MCP Tools
@@ -145,8 +141,8 @@ Can you show me the metadata for the paper with DOI 10.1101/123456?
 
 ## 📁 Project Structure
 
-- `biorxiv_server.py`: The main MCP server implementation using FastMCP
-- `biorxiv_web_search.py`: Contains the web scraping logic for searching bioRxiv
+- `biorxiv_mcp_server/biorxiv_server.py`: The main MCP server implementation using FastMCP
+- `biorxiv_mcp_server/biorxiv_web_search.py`: Contains the web scraping logic for searching bioRxiv
 
 ## 🔧 Dependencies
 
